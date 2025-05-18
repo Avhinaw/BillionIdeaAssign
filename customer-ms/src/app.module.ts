@@ -5,9 +5,11 @@ import { Customer } from './entities/customer.entities';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CustomersModule } from './customers/customers.module';
+import { CustomerConsumer } from './rabbitmq/customer.consumer';
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }),
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -24,7 +26,7 @@ import { CustomersModule } from './customers/customers.module';
     }),
     CustomersModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, CustomerConsumer],
   providers: [AppService],
 })
 export class AppModule {}

@@ -2,9 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Customer } from '../entities/customer.entities';
+import { EventPattern, Payload } from '@nestjs/microservices'; // 👈 Add these
 
+console.log('✅ CustomersService loaded');
 @Injectable()
 export class CustomersService {
+  
   constructor(
     @InjectRepository(Customer)
     private readonly customerRepo: Repository<Customer>,
@@ -34,5 +37,15 @@ export class CustomersService {
     }
     return this.customerRepo.remove(customer);
   }
+
+  // ✅ Add this to listen to RabbitMQ event
   
+  @EventPattern('customer_order_placed')
+  handleOrderPlaced(@Payload() data: any) {
+    console.log('📬 [customer-ms] Received order event:', data);
+    
+    // Optional: Add your logic here
+    // E.g. save log, update customer's order count, etc.
+  }
 }
+
