@@ -1,6 +1,3 @@
-from pathlib import Path
-
-readme_content = """
 # 🛍️ E-Commerce System Using NestJS Microservices
 
 This project is a microservice-based e-commerce system built using:
