@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useCart } from '../context/CartContent';
+import cards from 'razorpay/dist/types/cards';
 
 interface Customer {
   id: number;
@@ -67,9 +68,10 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto py-8">
-      <h1 className="text-2xl font-bold mb-6">🧾 Checkout</h1>
-
+    <div className="max-w-4xl mx-auto py-8">
+      <>
+      {cart.length === 0 ? (<h1 className="text-2xl font-bold mb-6">Checkout</h1>):(<h1 className="text-xl font-bold mb-6">Checkout ({cart.length}) </h1>)}
+</>
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
@@ -78,10 +80,10 @@ export default function CheckoutPage() {
             {cart.map((item) => (
               <div
                 key={item.id}
-                className="border p-4 rounded-md shadow-sm bg-white flex justify-between items-center"
+                className="p-4 rounded-xl shadow-sm bg-white flex justify-between items-center"
               >
                 <div>
-                  <h2 className="font-semibold text-lg">{item.name}</h2>
+                  <h2 className="font-semibold">{item.name}</h2>
                   <p>Quantity: {item.quantity}</p>
                   <p>Price: ₹{item.price} × {item.quantity}</p>
                   <p className="font-bold text-green-600">
@@ -93,7 +95,7 @@ export default function CheckoutPage() {
                     removeFromCart(item.id);
                     toast.success(`🗑️ Removed ${item.name} from cart`);
                   }}
-                  className="text-sm bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition cursor-pointer"
+                  className="text-sm bg-red-500 text-white px-4 py-2 rounded-xl hover:bg-red-600 transition cursor-pointer"
                 >
                   Remove
                 </button>
@@ -107,9 +109,9 @@ export default function CheckoutPage() {
             <select
               value={customerId}
               onChange={(e) => setCustomerId(e.target.value)}
-              className="w-full border p-2 rounded"
+              className="w-full bg-gray-200 p-4 rounded-xl"
             >
-              <option className='text-black' value="">-- Choose Customer --</option>
+              <option className='text-black' value="">Choose Customer</option>
               {customers.map((c) => (
                 <option className='text-black' key={c.id} value={c.id}>
                   {c.name} (ID: {c.id})
@@ -119,13 +121,13 @@ export default function CheckoutPage() {
           </div>
 
           <div className="text-xl font-bold mb-4">
-            Grand Total: ₹{totalAmount}
+            Grand Total: ₹{Math.floor(totalAmount)}
           </div>
 
           <button
             onClick={handleCheckout}
             disabled={loading}
-            className="bg-indigo-600 text-white py-2 px-6 rounded hover:bg-indigo-700 transition cursor-pointer"
+            className="bg-[#e8262f] self-end px-5 py-2 text-sm text-white rounded-xl hover:bg-[#ea2832d1] transition-all duration-300r"
           >
             {loading ? 'Processing...' : 'Place Order'}
           </button>
