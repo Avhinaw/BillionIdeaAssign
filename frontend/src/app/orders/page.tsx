@@ -68,8 +68,8 @@ export default function OrdersPage() {
       ) : (
         <div className="space-y-8 text-black">
           {Object.entries(groupedOrders).map(([customerId, customerOrders]) => (
-            <div key={customerId} className="border rounded-lg bg-white shadow p-4">
-              <h2 className="text-lg font-bold mb-2">
+            <div key={customerId} className="bg-violet-400 rounded-lg shadow p-4">
+              <h2 className="text-lg text-white font-bold mb-2">
                 👤 {getCustomerName(Number(customerId))} (ID: {customerId})
               </h2>
 
@@ -77,7 +77,7 @@ export default function OrdersPage() {
                 {customerOrders.map((order) => (
                   <li
                     key={order.id}
-                    className="border p-3 rounded shadow-sm bg-gray-50"
+                    className="p-3 rounded shadow-sm bg-gray-200"
                   >
                     <p><strong>Order ID:</strong> {order.id}</p>
                     <p><strong>Product ID:</strong> {order.productId}</p>

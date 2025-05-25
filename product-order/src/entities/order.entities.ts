@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Product } from './product.entities';
 
 @Entity()
 export class Order {
