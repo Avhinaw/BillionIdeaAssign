@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import Loading from '../components/Loading';
 
 interface Customer {
   id: number;
@@ -110,7 +111,7 @@ export default function CustomersPage() {
         <h3>Email</h3>
         <h3>Action</h3>
         {loading ? (
-          <p>Loading customers...</p>
+          <Loading />
         ) : customers.length === 0 ? (
           <p>No customers found.</p>
         ) : (customers.map((c) => (

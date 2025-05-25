@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useCart } from '../context/CartContent';
 import cards from 'razorpay/dist/types/cards';
+import Loading from '../components/Loading';
 
 interface Customer {
   id: number;
@@ -73,7 +74,7 @@ export default function CheckoutPage() {
       {cart.length === 0 ? (<h1 className="text-2xl font-bold mb-6">Checkout</h1>):(<h1 className="text-xl font-bold mb-6">Checkout ({cart.length}) </h1>)}
 </>
       {cart.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <h2 className='w-full h-[70vh] flex items-center justify-center text-3xl font-bold'>Cart Empty</h2>
       ) : (
         <>
           <div className="space-y-4 mb-6 text-black">

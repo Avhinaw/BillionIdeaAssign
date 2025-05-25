@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Loading from '../components/Loading';
 
 interface Order {
   id: number;
@@ -62,8 +63,8 @@ export default function OrdersPage() {
       <h1 className="text-2xl font-bold mb-6">📦 All Orders by Customer</h1>
 
       {loading ? (
-        <p>Loading...</p>
-      ) : Object.keys(groupedOrders).length === 0 ? (
+        <Loading />
+) : Object.keys(groupedOrders).length === 0 ? (
         <p>No orders found.</p>
       ) : (
         <div className="space-y-8 text-black">
