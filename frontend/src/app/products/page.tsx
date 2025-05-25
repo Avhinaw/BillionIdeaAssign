@@ -24,10 +24,14 @@ export default async function ProductsPage() {
   const products = await getProducts();
 
   return (
-    <div className="flex flex-wrap justify-center gap-4">
+    <div className="w-screen min-w-screen px-32">
+      <h1 className="text-2xl font-bold capitalize py-5">featured products</h1>
+      <div className="grid grid-cols-5 gap-2">
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}
+      </div>
+      
     </div>
   );
 }
